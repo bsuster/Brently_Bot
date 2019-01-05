@@ -7,7 +7,7 @@ import asyncio
 players = []
 all_members = []
 bot = commands.Bot(command_prefix='!')
-token = 'ENTER TOKEN HERE'
+token = 'U AINT GETTING THE TOKEN THIS TIME'
 
 
 class player:
@@ -56,8 +56,6 @@ async def on_message(message):
         msg = message.content[5:] + ' has been online for '
         offline_msg = message.content[5:] + ' logged off at '
         playername = message.content[5:]
-        for i in members_all:
-            all_members.
         for z in players:
             if z.name == playername:
                 break
