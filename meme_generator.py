@@ -79,5 +79,3 @@ def get_meme():
         call_urls()
         print("urls called, calling get_meme")
         return get_meme()
-
-
