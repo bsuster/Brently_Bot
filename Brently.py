@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import random
 import webCrawler
+import wiki
 bot = commands.Bot(command_prefix='!')
 
 
