@@ -4,10 +4,19 @@ import random
 import webCrawler
 import asyncio
 import Wiki
+import datetime
 
+players = []
+all_members = []
 bot = commands.Bot(command_prefix='!')
-
 server = discord.Server(id='530909195873026051')
+
+
+class player:
+    def __init__(self,name,  time_joined = datetime.datetime.now(), time_leave = None):
+        self.name = name
+        self.time_joined = time_joined
+        self.time_leave = time_leave
 
 
 @bot.event
@@ -40,15 +49,15 @@ async def on_message(message):
     if message.content.upper().startswith('!BAN'):
         ban_membs = bot.get_all_members()
         print(message.content)
-        for ban_mem in ban_membs:
-            print(ban_mem.name)
-            print(message.content[5:])
-            if ban_mem.name == message.content[5:]:
-                try:
+        try:
+            for ban_mem in ban_membs:
+                print(ban_mem.name)
+                print(message.content[5:])
+                if ban_mem.name == message.content[5:]:
                     await bot.ban(ban_mem)
                     await bot.say('I will bring down the mighty BANHAMMER upon them my lord!')
-                except:
-                    pass
+        except:
+            pass
 
     # unban command
     if message.content.upper().startswith('!UNBAN'):
@@ -70,6 +79,39 @@ async def on_message(message):
         command = message.content[6:]
         url = Wiki.search(command)
         await bot.edit_message(msg, url)
+
+
+    if message.content.upper().startswith('!LOG'):
+        members_all = bot.get_all_members()
+
+        msg = message.content[5:] + ' has been online for '
+        offline_msg = message.content[5:] + ' logged off at '
+        playername = message.content[5:]
+        for z in players:
+            if z.name == playername:
+                break
+
+            ##print(message.content[5:])
+        for i in members_all:
+            if playername == i.name:
+                if i.status == discord.Status.online:
+                    time_on = str(datetime.datetime.now() - z.time_joined)
+                    await bot.send_message(message.channel, msg + time_on[0:7])
+                if i.status == discord.Status.offline:
+                    time_left = z.time_leave
+                    await bot.send_message(message.channel, offline_msg + str(time_left))
+
+
+    if message.content.upper().startswith('!THANOS'):
+        members_all = bot.get_all_members()
+        await
+        bot.send_message(message.channel, "I don't feel soo good.")
+        for z in members_all:
+            rand_int = random.randint(0, 1)
+            if rand_int == 0:
+                continue
+            if rand_int == 1:
+                await bot.kick(z)
 
     '''if message.content.upper().startswith('!CLEAR'):
         print('Clearing...')
@@ -106,5 +148,14 @@ async def on_ready():
     print(bot.user.id)
 
     print('------')
+
+    members_all = bot.get_all_members()
+
+    for i in members_all:
+        if i.status == discord.Status.online:
+            print(i.name)
+            p = player(str(i.name))
+            players.append(p)
+
 
 bot.run('NTMxMTg1NDAxMjU2MjE0NTMx.DxKRew.aPN0QaQujKS9mS794NKXCry0kwc')
