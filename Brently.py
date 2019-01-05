@@ -47,6 +47,11 @@ async def on_message(message):
     if message.content.upper().startswith("!MEME"):
         meme = webCrawler.get_meme()
         await bot.send_message(message.channel, meme)
+     #wiki logic
+    if message.content.upper().startswith("!WIKI"):
+        command = message.content[6:]
+        url = wiki.search(command)
+        await bot.send_message(message.channel, url)
 
 @bot.event
 async def on_ready():
