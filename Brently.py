@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 import random
-
+import webCrawler
 bot = commands.Bot(command_prefix='!')
 
 
@@ -41,7 +41,12 @@ async def on_message(message):
                 msg = 'I will bring down the mighty BANHAMMER upon them my lord!'.format(message)
                 await bot.send_message(message.channel, msg)
                 break
+    
 
+    #adding command for meme
+    if message.content.upper().startswith("!MEME"):
+        meme = webCrawler.get_meme()
+        await bot.send_message(message.channel, meme)
 
 @bot.event
 async def on_ready():
