@@ -63,7 +63,7 @@ if message.content.upper().startswith('!HELP'):
     !unban [unbans player from chat]
     !wiki <game> <item> [displays wiki page of item]
     !yt <video name> [displays specified YouTube video]
-    """.format(message)
+    """
 
     await bot.send_message(message.channel, msg)
         
