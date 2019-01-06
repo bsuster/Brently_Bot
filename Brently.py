@@ -55,7 +55,7 @@ async def on_message(message):
     if message.content.upper().startswith('!HELP'):
      msg = """
     !ban <userName> [bans user from chat]
-!hello [greets Brentley Bot]
+!hello [greets Brently Bot]
 !help [gives list of commands]
 !kick <userName> [kicks user from chat]
 !log <userName> [gives user's current uptime]
