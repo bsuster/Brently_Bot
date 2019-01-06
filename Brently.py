@@ -52,7 +52,7 @@ async def on_message(message):
         await bot.send_message(message.channel, msg)
 
 #help
-if message.content.upper().startswith('!HELP'):
+    if message.content.upper().startswith('!HELP'):
     msg = """!ban <userName> [bans user from chat]
     !hello [greets Brentley Bot]
     !help [gives list of commands]
