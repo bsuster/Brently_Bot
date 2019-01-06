@@ -5,6 +5,7 @@ import webCrawler
 import asyncio
 import Wiki
 import datetime
+import YouTube
 
 players = []
 all_members = []
@@ -95,7 +96,12 @@ async def on_message(message):
         command = message.content[6:]
         url = Wiki.search(command)
         await bot.edit_message(msg, url)
-
+    # yt
+    if message.content.upper().startswith("!YT"):
+        msg = await bot.send_message(message.channel, 'Retrieving...')
+        command = message.content[4:]
+        url = YouTube.search(command)
+        await bot.edit_message(msg, url)
 
     if message.content.upper().startswith('!LOG'):
         members_all = bot.get_all_members()

@@ -59,11 +59,13 @@ def store_memes(soup):
 
 
 def get_meme():
+    delete = False
     myFile = Path("memes.txt")
     if myFile.is_file():
         with open("memes.txt") as f:
             firstLine = f.readline()
             now = str(datetime.datetime.now())[8:10] + "\n"
+            print(firstLine == now)
             if (firstLine == now):
                 rnd = random.randint(2, 499)
                 while rnd > 0:
@@ -72,6 +74,7 @@ def get_meme():
                 print("type of link" + str(type(link)))
                 return link
             else:
+                
                 f.close()
                 call_urls()
                 return
@@ -81,4 +84,4 @@ def get_meme():
         print("urls called, calling get_meme")
         return get_meme()
 
-
+print(get_meme())
