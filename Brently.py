@@ -51,6 +51,22 @@ async def on_message(message):
 
         await bot.send_message(message.channel, msg)
 
+#help
+if message.content.upper().startswith('!HELP'):
+    msg = """!ban <userName> [bans user from chat]
+    !hello [greets Brentley Bot]
+    !help [gives list of commands]
+    !kick <userName> [kicks user from chat]
+    !log <userName> [gives user's current uptime]
+    !meme [displays random meme]
+    !thanos [kicks 50% of chat]
+    !unban [unbans player from chat]
+    !wiki <game> <item> [displays wiki page of item]
+    !yt <video name> [displays specified YouTube video]
+    """.format(message)
+
+    await bot.send_message(message.channel, msg)
+        
 # kick user command
     if message.content.upper().startswith('!KICK') and message.author.permissions_in(message.channel).administrator:
         membs = bot.get_all_members()
