@@ -71,7 +71,7 @@ async def on_message(message):
                 print(message.content[5:])
                 if ban_mem.name == message.content[5:]:
                     await bot.ban(ban_mem)
-                    await bot.say('I will bring down the mighty BANHAMMER upon them my lord!')
+                    await bot.send_message(message.channel, 'I will bring down the mighty BANHAMMER upon them my lord!')
         except:
             pass
 
