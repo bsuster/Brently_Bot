@@ -72,8 +72,9 @@ def get_meme():
                 print("type of link" + str(type(link)))
                 return link
             else:
+                f.close()
                 call_urls()
-                return get_meme()
+                return
     else:
         print("calling urls")
         call_urls()
