@@ -96,7 +96,14 @@ async def on_message(message):
         url = Wiki.search(command)
         await bot.edit_message(msg, url)
 
+    # yt
+    if message.content.upper().startswith("!YT"):
+        msg = await bot.send_message(message.channel, 'Retrieving...')
+        command = message.content[4:]
+        url = YouTube.search(command)
+        await bot.edit_message(msg, url)
 
+    # log
     if message.content.upper().startswith('!LOG'):
         members_all = bot.get_all_members()
 
