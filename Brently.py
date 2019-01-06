@@ -43,7 +43,11 @@ async def on_message(message):
     if message.author == bot.user:
 
         return
-
+#slap
+    if message.content.upper().startswith('!SLAP'):
+            members_all = bot.get_all_members
+            author = str(message.author.name)
+            await bot.send_message(message.channel, author + " has slapped " + message.content[6:])
 # greeting message
     if message.content.upper().startswith('!HELLO'):
 
@@ -53,22 +57,21 @@ async def on_message(message):
 
 #help
     if message.content.upper().startswith('!HELP'):
-      msg = """
+     msg = """
     !ban <userName> [bans user from chat]
-!hello [greets Brently Bot]
+!hello [greets Brentley Bot]
 !help [gives list of commands]
 !kick <userName> [kicks user from chat]
 !log <userName> [gives user's current uptime]
 !meme [displays random meme]
-!spam <message> [displays message 50 times]
 !thanos [kicks 50% of chat]
 !unban [unbans player from chat]
 !wiki <game> <item> [displays wiki page of item]
 !yt <video name> [displays specified YouTube video]
     """
-      await bot.send_message(message.channel, msg)
+    await bot.send_message(message.channel, msg)
         
-    #!kick user command
+# kick user command
     if message.content.upper().startswith('!KICK') and message.author.permissions_in(message.channel).administrator:
         membs = bot.get_all_members()
         print(message.content)
@@ -79,7 +82,7 @@ async def on_message(message):
                 print("attempting to kick")
                 await bot.kick(mem)
                 break
-    #!ban hammer
+# ban hammer
     if message.content.upper().startswith('!BAN') and message.author.permissions_in(message.channel).administrator:
         ban_membs = bot.get_all_members()
         print(message.content)
@@ -93,7 +96,7 @@ async def on_message(message):
         except:
             pass
 
-    #!unban command
+    # unban command
     if message.content.upper().startswith('!UNBAN') and message.author.permissions_in(message.channel).administrator:
         users = await bot.get_bans(server)
         print(users)
@@ -102,80 +105,24 @@ async def on_message(message):
             if u.name == message.content[7:]: # ADD NAME HERE:
                 await bot.unban(server, u)
 
-    #!meme gen command
+    # meme gen command
     if message.content.upper().startswith('!MEME'):
         meme = webCrawler.get_meme()
         await bot.send_message(message.channel, meme)
 
-    #!wiki logic
+        # wiki logic
     if message.content.upper().startswith("!WIKI"):
         msg = await bot.send_message(message.channel, 'Retrieving...')
         command = message.content[6:]
         url = Wiki.search(command)
         await bot.edit_message(msg, url)
-    #!yt
+    # yt
     if message.content.upper().startswith("!YT"):
         msg = await bot.send_message(message.channel, 'Retrieving...')
         command = message.content[4:]
         url = YouTube.search(command)
         await bot.edit_message(msg, url)
-        
-    #!spam
-    if message.content.upper().startswith("!SPAM"):
-        command = message.content[6:]
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        await bot.send_message(message.channel, command)
-        
 
-    #!log
     if message.content.upper().startswith('!LOG'):
         members_all = bot.get_all_members()
 
@@ -196,7 +143,7 @@ async def on_message(message):
                     time_left = z.time_leave
                     await bot.send_message(message.channel, offline_msg + str(time_left))
 
-    #!thanos
+
     if message.content.upper().startswith('!THANOS') and message.author.permissions_in(message.channel).administrator:
         members_all = bot.get_all_members()
         await bot.send_message(message.channel, "I don't feel soo good.")
