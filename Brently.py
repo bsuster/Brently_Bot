@@ -13,7 +13,7 @@ server = discord.Server(id='530909195873026051')
 
 
 class player:
-    def __init__(self,name,  time_joined = datetime.datetime.now(), time_leave = None):
+    def __init__(self,name,  time_joined = datetime.datetime.now(), time_leave=None):
         self.name = name
         self.time_joined = time_joined
         self.time_leave = time_leave
@@ -23,6 +23,22 @@ class player:
 async def on_message(message):
 
  # we do not want the bot to reply to itself
+    x = random.randint(1, 10)
+    if x == 5:
+        print('Nowlin Encouragement')
+        y = random.randint(1, 5)
+        if y == 1:
+            await bot.send_message(message.channel, 'Why are you using Python you moron?')
+        if y == 2:
+            await bot.send_message(message.channel, 'How about you use code that actually works?')
+        if y == 3:
+            await bot.send_message(message.channel, 'YOU SHOULD USE ASSEMBLY!')
+        if y == 4:
+            await bot.send_message(message.channel, 'You are a disgrace to humanity for even thinking of using Python')
+        if y == 5:
+            await bot.send_message(message.channel, 'WHYY?!?!?!?!')
+        return
+
     if message.author == bot.user:
 
         return
@@ -35,7 +51,7 @@ async def on_message(message):
         await bot.send_message(message.channel, msg)
 
 # kick user command
-    if message.content.upper().startswith('!KICK'):
+    if message.content.upper().startswith('!KICK') and message.author.permissions_in(message.channel).administrator:
         membs = bot.get_all_members()
         print(message.content)
         for mem in membs:
@@ -46,7 +62,7 @@ async def on_message(message):
                 await bot.kick(mem)
                 break
 # ban hammer
-    if message.content.upper().startswith('!BAN'):
+    if message.content.upper().startswith('!BAN') and message.author.permissions_in(message.channel).administrator:
         ban_membs = bot.get_all_members()
         print(message.content)
         try:
@@ -60,7 +76,7 @@ async def on_message(message):
             pass
 
     # unban command
-    if message.content.upper().startswith('!UNBAN'):
+    if message.content.upper().startswith('!UNBAN') and message.author.permissions_in(message.channel).administrator:
         users = await bot.get_bans(server)
         print(users)
         for u in users:
@@ -102,10 +118,9 @@ async def on_message(message):
                     await bot.send_message(message.channel, offline_msg + str(time_left))
 
 
-    if message.content.upper().startswith('!THANOS'):
+    if message.content.upper().startswith('!THANOS') and message.author.permissions_in(message.channel).administrator:
         members_all = bot.get_all_members()
-        await
-        bot.send_message(message.channel, "I don't feel soo good.")
+        await bot.send_message(message.channel, "I don't feel soo good.")
         for z in members_all:
             rand_int = random.randint(0, 1)
             if rand_int == 0:
@@ -157,5 +172,28 @@ async def on_ready():
             p = player(str(i.name))
             players.append(p)
 
+@bot.event
+
+@asyncio.coroutine
+
+async def on_member_update(before, after):
+
+   if before.status != after.status:
+
+       if before.status == discord.Status.offline and after.status == discord.Status.online:
+
+           p = player(after.name)
+
+           players.append(p)
+
+       if before.status == discord.Status.online and after.status == discord.Status.offline:
+
+            for i in players:
+
+                if i.name == after.name:
+
+                    time_leave = datetime.datetime.now()
+
+                    i.time_leave = time_leave
 
 bot.run('NTMxMTg1NDAxMjU2MjE0NTMx.DxKRew.aPN0QaQujKS9mS794NKXCry0kwc')
