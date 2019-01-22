@@ -6,12 +6,32 @@ import asyncio
 import Wiki
 import datetime
 import YouTube
+import json
+import sys
+
+try: ##Open Keys.json
+    with open('Brently_Bot-master/Keys.json', 'r+') as keys_file: ## if the file exists, open it in read mode
+        print("File exists!")
+        keys = json.loads(keys_file.read())
+except IOError:
+    with open('Brently_Bot-master/Keys.json', 'w+') as keys_file: ## If the file doesn't exist, create it.
+        json.dump({
+        "Server_ID" : "",
+        "Token" : "",
+        }, keys_file)
+        print("File did not exist, so it was generated! Please inout your Discord Bot Keys")
+        ##Would like to figure out a way to terminate the program here. Currently it spazzes out if I don't 
+        
+Server_ID = keys["Server_ID"]
+Token = keys["Token"]
+token_str = str(Token)
+print("Using Token: " + token_str)
+
 
 players = []
 all_members = []
 bot = commands.Bot(command_prefix='!')
-server = discord.Server(id='530909195873026051')
-
+server = discord.Server(id=Server_ID)
 
 class player:
     def __init__(self,name,  time_joined = datetime.datetime.now(), time_leave=None):
@@ -222,4 +242,4 @@ async def on_member_update(before, after):
 
                     i.time_leave = time_leave
 
-bot.run('NTMxMTg1NDAxMjU2MjE0NTMx.DxKRew.aPN0QaQujKS9mS794NKXCry0kwc')
+bot.run(token_str)
